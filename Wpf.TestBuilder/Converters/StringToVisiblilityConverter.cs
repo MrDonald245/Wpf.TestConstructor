@@ -3,13 +3,13 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace Wpf.TestBuilder.Pages
+namespace Wpf.TestBuilder.Converters
 {
-    class UploaderImageStateConverter : IValueConverter
+    class StringToVisiblilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (bool)value ? "Visible" : "Hidden";
+            return (string)value == String.Empty || (string)value == null ? "Hidden" : "Visible";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -17,11 +17,11 @@ namespace Wpf.TestBuilder.Pages
             switch ((Visibility)value)
             {
                 case Visibility.Visible:
-                    return true;
+                    return "";
                 case Visibility.Hidden:
-                    return false;
+                    return "";
                 default:
-                    return false;
+                    return "";
             }
         }
     }

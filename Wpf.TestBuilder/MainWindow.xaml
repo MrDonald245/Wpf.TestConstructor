@@ -3,17 +3,20 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:commands="clr-namespace:Wpf.TestBuilder.Commands"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="350" Width="525"
+        Loaded="MainWindow_OnLoaded">
     <Window.CommandBindings>
         <CommandBinding Command="New" CanExecute="NewCommand_CanExecute" Executed="NewCommand_Executed"/>
         <CommandBinding Command="Open" CanExecute="OpenCommand_CanExecute" Executed="OpenCommand_Executed"/>
         <CommandBinding Command="Save" CanExecute="SaveCommand_CanExecute" Executed="SaveCommand_Executed"/>
-        <CommandBinding Command="SaveAs" CanExecute="SaveAsCommand_CanExecute" Executed="SaveAsCommand_Executed"/>
         <CommandBinding Command="Close" CanExecute="CloseCommand_CanExecute" Executed="CloseCommand_Executed"/>
+        <CommandBinding Command="commands:ActionCommands.Cancel" CanExecute="CancelCommand_CanExecute" Executed="CancelCommand_Executed"/>
 
         <CommandBinding Command="Help" CanExecute="HelpCommand_CanExecute" Executed="HelpCommand_Executed"/>
     </Window.CommandBindings>
+
     <DockPanel>
         <!-- Menu -->
         <Menu DockPanel.Dock="Top">
@@ -22,7 +25,6 @@
                 <MenuItem Command="Open"/>
                 <Separator />
                 <MenuItem Command="Save"/>
-                <MenuItem Command="SaveAs"/>
                 <Separator />
                 <MenuItem Command="Close"/>
             </MenuItem>
@@ -31,7 +33,8 @@
             </MenuItem>
         </Menu>
 
-        <!-- Page -->
-        <Frame Name="FramePageContent" Margin="5"/>
+        <!-- Frame for pages -->
+        <Frame Name="FramePageContent"/>
+
     </DockPanel>
 </Window>

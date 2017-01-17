@@ -3,9 +3,9 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace Wpf.TestBuilder.Pages
+namespace Wpf.TestBuilder.Converters
 {
-    class EmtyImageStateConverter : IValueConverter
+    class UnvisibleStateConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

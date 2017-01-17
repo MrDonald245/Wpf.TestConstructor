@@ -49,12 +49,20 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WpfAnimatedGif, Version=1.4.14.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WpfAnimatedGif.1.4.14\lib\net\WpfAnimatedGif.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Dialogs\InputTextDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -63,23 +71,54 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Commands\ActionCommands.cs" />
+    <Compile Include="MainWindowViewModel.cs" />
+    <Compile Include="Converters\EmptyStringToEnabledConverter.cs" />
+    <Compile Include="Dialogs\InputTextDialog.xaml.cs">
+      <DependentUpon>InputTextDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\DialogWindowAddNewOptionObservableViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\ConstructNewTestPage.xaml">
+    <Page Include="Pages\QuestionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Assets\QustionPageResourceDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SavedTestsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\TestPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Pages\ConstructNewTestPage.xaml.cs">
-      <DependentUpon>ConstructNewTestPage.xaml</DependentUpon>
+    <Compile Include="Models\OptionModel.cs" />
+    <Compile Include="Models\OptionsModel.cs" />
+    <Compile Include="Models\QuestionModel.cs" />
+    <Compile Include="Pages\QuestionPage.xaml.cs">
+      <DependentUpon>QuestionPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ConstructNewTestPageModelView.cs" />
-    <Compile Include="Pages\EmtyImageStateConverter.cs" />
-    <Compile Include="Pages\UploaderImageStateConverter.cs" />
-    <Compile Include="Pages\ModelViewBase.cs" />
+    <Compile Include="Pages\QuestionPageObservableViewModel.cs" />
+    <Compile Include="Converters\StringToVisiblilityConverter.cs" />
+    <Compile Include="Converters\UnvisibleStateConverter.cs" />
+    <Compile Include="Converters\VisibleStateConverter.cs" />
+    <Compile Include="Pages\SavedTestsPage.xaml.cs">
+      <DependentUpon>SavedTestsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\TestPage.xaml.cs">
+      <DependentUpon>TestPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\TestPageObservableViewModel.cs" />
+    <Compile Include="ObservableViewModel.cs" />
+    <Compile Include="ViewModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -97,6 +136,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -105,6 +145,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\loading.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Remove.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
