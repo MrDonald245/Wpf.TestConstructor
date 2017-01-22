@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Navigation;
@@ -13,7 +13,7 @@ namespace Wpf.TestBuilder
     /// </summary>
     public partial class MainWindow : Window
     {
-        private MainWindowViewModel _viewModel = new MainWindowViewModel();
+        private readonly MainWindowViewModel _viewModel = new MainWindowViewModel();
 
         public MainWindow()
         {
@@ -22,12 +22,14 @@ namespace Wpf.TestBuilder
 
         /// <summary>
         /// When the main window is loaded show all tests in a listview.
+        /// Open saved tests from tests.bin.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            FramePageContent.ContentRendered += FramePageContentOnContentRendered;
+            FramePageContent.Source = new Uri("Pages/SavedTestsPage.xaml", UriKind.Relative);
         }
 
         /// <summary>
@@ -48,7 +50,6 @@ namespace Wpf.TestBuilder
         private void NewCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             FramePageContent.Source = new Uri("Pages/TestPage.xaml", UriKind.Relative);
-            FramePageContent.ContentRendered += FramePageContentOnContentRendered;         
         }
 
         /// <summary>
@@ -58,24 +59,55 @@ namespace Wpf.TestBuilder
         /// <param name="eventArgs"></param>
         private void FramePageContentOnContentRendered(object sender, EventArgs eventArgs)
         {
-            _viewModel.TestPage = FramePageContent.Content as TestPage;
-
-            if (_viewModel.TestPage != null)
+            if (FramePageContent.Content is TestPage)
             {
+                _viewModel.TestPage = FramePageContent.Content as TestPage;
                 _viewModel.TestPage.AllTabsClosed += TestPageOnAllTabsClosed;
                 _viewModel.TestPage.Saving += TestPageOnSaving;
-            }       
+
+                if (_viewModel.TestModelForEdit != null)
+                {
+                    ((TestPage)FramePageContent.Content).Edit(_viewModel.TestModelForEdit);
+                }
+            }
+
+            if (FramePageContent.Content is SavedTestsPage)
+            {
+                ((SavedTestsPage)FramePageContent.Content).SavedTestsSelected += SavedTestsPageOnSavedTestsSelected;
+            }
+        }
+
+        /// <summary>
+        /// Occures when saved test item in a saved tests page is clicked.
+        /// </summary>
+        /// <param name="testModel"></param>
+        private void SavedTestsPageOnSavedTestsSelected(TestModel testModel)
+        {
+            _viewModel.TestModelForEdit = testModel;
+            FramePageContent.Source = new Uri("Pages/TestPage.xaml", UriKind.Relative);
         }
 
         /// <summary>
         /// Occures when save button was clicked in a test page.
-        /// Recieves question model to be serialized. 
+        /// Recieves test model to be serialized. 
         /// </summary>
-        /// <param name="questionModels"></param>
-        private void TestPageOnSaving(List<QuestionModel> questionModels)
+        private void TestPageOnSaving(TestModel testModel)
         {
-           _viewModel.SerializeQuestionModels(questionModels);
-           _viewModel.TestPage.ClearTabs();
+            TestModel editableSavedTest = null;
+            if (_viewModel.SavedTestsPage.Tests.Count > 0)
+                editableSavedTest = _viewModel.SavedTestsPage.Tests.First(model => model.Name == testModel.Name);
+
+            if (editableSavedTest != null)
+            {
+                _viewModel.SavedTestsPage.Tests.Remove(editableSavedTest);
+                _viewModel.SavedTestsPage.Tests.Add(testModel);
+                _viewModel.TestModelForEdit = null;
+            }
+            else
+                _viewModel.SavedTestsPage.Tests.Add(testModel);
+
+            _viewModel.SavedTestsPage.Tests.Save();
+            _viewModel.TestPage.ClearTabs();
         }
 
         /// <summary>
@@ -86,7 +118,7 @@ namespace Wpf.TestBuilder
         {
             _viewModel.TestPage.ClearTabs();
             FramePageContent.NavigationUIVisibility = NavigationUIVisibility.Hidden;
-            FramePageContent.Source = null;
+            FramePageContent.Source = new Uri("Pages/SavedTestsPage.xaml", UriKind.Relative);
         }
 
         private void OpenCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -96,7 +128,7 @@ namespace Wpf.TestBuilder
 
         private void OpenCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            
+
             throw new NotImplementedException();
         }
 
@@ -139,7 +171,8 @@ namespace Wpf.TestBuilder
         {
             if (_viewModel.TestPage != null)
                 e.CanExecute = !_viewModel.TestPage.IsTabsEmpty;
-            e.CanExecute = false;
+            else
+                e.CanExecute = false;
         }
 
         /// <summary>
@@ -153,7 +186,7 @@ namespace Wpf.TestBuilder
         }
 
         /// <summary>
-        /// Cancel command is avalible always.
+        /// Cancel command is always avalible.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

@@ -12,18 +12,51 @@ namespace Wpf.TestBuilder.Pages
     public partial class QuestionPage : Page
     {
         private readonly QuestionPageObservableViewModel _observableViewModel = new QuestionPageObservableViewModel();
+
         /// <summary>
         /// Contains variants of answers.
         /// </summary>
-        public OptionsModel OptionsModel => _observableViewModel.OptionsModel;
+        public OptionsModel OptionsModel
+        {
+            get { return _observableViewModel.OptionsModel; }
+            set { _observableViewModel.OptionsModel = value; }
+        }
+
         /// <summary>
         /// Question image. If is not selected returns null;
         /// </summary>
-        public BitmapImage Image => ImageUploader.Source as BitmapImage;
+        public BitmapImage Image
+        {
+            get { return ImageUploader.Source as BitmapImage; }
+            set { ImageUploader.Source = value; }
+        }
+
         /// <summary>
         /// A text for a question.
         /// </summary>
-        public string QuestionText => _observableViewModel.LabelTextValue;
+        public string QuestionText
+        {
+            get { return _observableViewModel.LabelTextValue; }
+            set { _observableViewModel.LabelTextValue = value; }
+        }
+
+        public bool IsImageSelected
+        {
+            get { return _observableViewModel.IsImageSelected; }
+            set { _observableViewModel.IsImageSelected = value; }
+        }
+
+        public bool IsLabelTextInputEnabled
+        {
+            get { return _observableViewModel.IsLabelTextInputEnabled; }
+            set { _observableViewModel.IsLabelTextInputEnabled = value; }
+        }
+
+        public bool IsOptionsListBoxEnabled
+        {
+            get { return _observableViewModel.IsOptionsListBoxEnabled; }
+            set { _observableViewModel.IsOptionsListBoxEnabled = value; }
+        }
 
         public QuestionPage()
         {

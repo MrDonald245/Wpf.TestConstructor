@@ -20,9 +20,24 @@ namespace Wpf.TestBuilder.Pages
             }
         }
 
+        private bool _isInEditMode;
+        public bool IsInEditMode
+        {
+            get { return _isInEditMode; }
+            set
+            {
+                _isInEditMode = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ObservableCollection<TabItem> Tabs { get; set; } = new ObservableCollection<TabItem>();
 
+        public event Action<int> QuestionContainerContentRenderd;
+
         private TabItem _addTabItem = new TabItem { Header = "+", IsSelected = false };
+
+        private int _editCurrentTabCount = 1;
 
         /// <summary>
         /// Make first tab and "add-button" after.
@@ -42,13 +57,28 @@ namespace Wpf.TestBuilder.Pages
         /// <returns></returns>
         private TabItem CreateNewTabItem(DataTemplate headerTemplate)
         {
+            Frame questionContainer = new Frame { Source = new Uri("Pages/QuestionPage.xaml", UriKind.Relative) };
+            if (IsInEditMode)
+                questionContainer.ContentRendered += QuestionContainerOnContentRendered;
+
             return new TabItem
             {
                 Header = CreateTabHeaderName(),
                 Name = CreateTabHeaderName(),
                 HeaderTemplate = headerTemplate,
-                Content = new Frame { Source = new Uri("Pages/QuestionPage.xaml", UriKind.Relative) }
+                Content = questionContainer
             };
+        }
+        
+        /// <summary>
+        /// Occures when question container content is ready.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QuestionContainerOnContentRendered(object sender, EventArgs e)
+        {
+            QuestionContainerContentRenderd?.Invoke(_editCurrentTabCount);
+            _editCurrentTabCount++;
         }
 
         /// <summary>
@@ -106,12 +136,12 @@ namespace Wpf.TestBuilder.Pages
                 Tabs[0].IsSelected = true;
             else
             {
-                    Tabs
-                        .Select(item => item)
-                        .Where(item => item != deletedTab)
-                        .Last(item => item != _addTabItem)
-                        .IsSelected = true;
-                
+                Tabs
+                    .Select(item => item)
+                    .Where(item => item != deletedTab)
+                    .Last(item => item != _addTabItem)
+                    .IsSelected = true;
+
             }
         }
 

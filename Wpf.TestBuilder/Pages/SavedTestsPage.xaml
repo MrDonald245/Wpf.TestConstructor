@@ -8,6 +8,16 @@
       Title="SavedTestsPage">
 
     <Grid>
-        <ListView></ListView>
+        <ListView Name ="ListViewSavedTests" ItemsSource="{Binding TestsModel}" 
+                  MouseDoubleClick="ListViewSavedTests_OnMouseDoubleClick">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel>
+                        <TextBlock Text="{Binding Name}" 
+                                   FontWeight="Bold"/>
+                    </WrapPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>

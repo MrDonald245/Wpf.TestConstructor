@@ -4,10 +4,14 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:commands="clr-namespace:Wpf.TestBuilder.Commands"
+      xmlns:converters="clr-namespace:Wpf.TestBuilder.Converters"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="TestPage">
 
+    <Page.Resources>
+        <converters:EnabledReverseConverter x:Key="EnabledReverseConverter"/>
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -18,7 +22,8 @@
         <!-- Subject name -->
         <DockPanel Margin="5">
             <TextBlock Text="Subject name:" Margin="0,0,5,0"/>
-            <TextBox Text="{Binding Path=SubjectName}"/>
+            <TextBox Text="{Binding Path=SubjectName, UpdateSourceTrigger=PropertyChanged}"
+                     IsEnabled="{Binding Path=IsInEditMode, Converter={StaticResource EnabledReverseConverter}}"/>
         </DockPanel>
         
         <!-- TabControl with an answer page inside wich is created dynamicly -->

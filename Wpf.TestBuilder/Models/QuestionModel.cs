@@ -1,55 +1,41 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Windows.Media.Imaging;
+using Wpf.TestBuilder.Utils;
 
 namespace Wpf.TestBuilder.Models
 {
     [Serializable]
     public class QuestionModel : ISerializable
     {
-        public string Name { get; set; }
         public BitmapImage Image { get; set; }
-        /// <summary>
-        /// Get image in bytes.
-        /// </summary>
-        public byte[] ImageInBytes => BitmapImageToByteArrey(Image);
+
         public string QuestionText { get; set; }
         public OptionsModel Options { get; set; }
 
-        public OptionModel[] OptionsInArrey => Options.ToArray();
+        public QuestionModel() { }
 
-        public QuestionModel()
+        /// <summary>
+        /// Serializable constructor for deserialization
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
+        public QuestionModel(SerializationInfo info, StreamingContext context)
         {
+            Image = SerializationTools.ByteArreyToBitmapImage(info.GetValue("Image", typeof(byte[])) as byte[]);
+            QuestionText = info.GetString("QuestionText");
+            Options = SerializationTools.OptionsArreyToOptionsModel(info.GetValue("Options", typeof(OptionModel[])) as OptionModel[]);
         }
 
-        public QuestionModel(string name, BitmapImage image, string questionText, OptionsModel options)
+        public QuestionModel(BitmapImage image, string questionText, OptionsModel options)
         {
-
-            Name = name;
             Image = image;
             QuestionText = questionText;
             Options = options;
         }
 
-        public byte[] BitmapImageToByteArrey(BitmapImage image)
-        {
-            if (image != null)
-            {
-                var encoder = new JpegBitmapEncoder();
-                encoder.Frames.Add(BitmapFrame.Create(image));
-
-                using (var ms = new MemoryStream())
-                {
-                    encoder.Save(ms);
-                    return ms.ToArray();
-                }
-            }
-
-            return default(byte[]);
-        }
-
+       
         /// <summary>
         /// Instructions what to serialize.
         /// BitmapImage is skiped becouse of its inability to serialization.
@@ -58,10 +44,9 @@ namespace Wpf.TestBuilder.Models
         /// <param name="context"></param>
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            info.AddValue("Name", Name);
-            info.AddValue("ImageInBytes", ImageInBytes);
+            info.AddValue("Image", SerializationTools.BitmapImageToByteArrey(Image));
             info.AddValue("QuestionText", QuestionText);
-            info.AddValue("OptionsInArrey", OptionsInArrey);
+            info.AddValue("Options", Options.ToArray());
         }
     }
 }

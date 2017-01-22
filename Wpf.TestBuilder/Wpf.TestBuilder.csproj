@@ -72,6 +72,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Commands\ActionCommands.cs" />
+    <Compile Include="Converters\EnabledReverseConverter.cs" />
     <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="Converters\EmptyStringToEnabledConverter.cs" />
     <Compile Include="Dialogs\InputTextDialog.xaml.cs">
@@ -103,6 +104,9 @@
     <Compile Include="Models\OptionModel.cs" />
     <Compile Include="Models\OptionsModel.cs" />
     <Compile Include="Models\QuestionModel.cs" />
+    <Compile Include="Models\QuestionsModel.cs" />
+    <Compile Include="Models\TestModel.cs" />
+    <Compile Include="Models\TestsModel.cs" />
     <Compile Include="Pages\QuestionPage.xaml.cs">
       <DependentUpon>QuestionPage.xaml</DependentUpon>
     </Compile>
@@ -113,11 +117,13 @@
     <Compile Include="Pages\SavedTestsPage.xaml.cs">
       <DependentUpon>SavedTestsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\SavedTestsPageObservableViewModel.cs" />
     <Compile Include="Pages\TestPage.xaml.cs">
       <DependentUpon>TestPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\TestPageObservableViewModel.cs" />
     <Compile Include="ObservableViewModel.cs" />
+    <Compile Include="Utils\SerializationTools.cs" />
     <Compile Include="ViewModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
