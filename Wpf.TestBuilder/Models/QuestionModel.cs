@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Runtime.Serialization;
 using System.Windows.Media.Imaging;
 using Wpf.TestBuilder.Utils;
@@ -14,7 +13,9 @@ namespace Wpf.TestBuilder.Models
         public string QuestionText { get; set; }
         public OptionsModel Options { get; set; }
 
-        public QuestionModel() { }
+        public QuestionModel()
+        {
+        }
 
         /// <summary>
         /// Serializable constructor for deserialization
@@ -25,7 +26,7 @@ namespace Wpf.TestBuilder.Models
         {
             Image = SerializationTools.ByteArreyToBitmapImage(info.GetValue("Image", typeof(byte[])) as byte[]);
             QuestionText = info.GetString("QuestionText");
-            Options = SerializationTools.OptionsArreyToOptionsModel(info.GetValue("Options", typeof(OptionModel[])) as OptionModel[]);
+            Options = (OptionsModel) info.GetValue("Options", typeof(OptionsModel));
         }
 
         public QuestionModel(BitmapImage image, string questionText, OptionsModel options)
@@ -35,7 +36,7 @@ namespace Wpf.TestBuilder.Models
             Options = options;
         }
 
-       
+
         /// <summary>
         /// Instructions what to serialize.
         /// BitmapImage is skiped becouse of its inability to serialization.
@@ -46,7 +47,7 @@ namespace Wpf.TestBuilder.Models
         {
             info.AddValue("Image", SerializationTools.BitmapImageToByteArrey(Image));
             info.AddValue("QuestionText", QuestionText);
-            info.AddValue("Options", Options.ToArray());
+            info.AddValue("Options", Options);
         }
     }
 }

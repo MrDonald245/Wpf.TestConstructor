@@ -46,8 +46,7 @@ namespace Wpf.TestBuilder.Models
             catch (FileNotFoundException)
             {
                 // Do not write changes from tests.bin when an exception occures
-            }   
+            }
         }
-
     }
 }

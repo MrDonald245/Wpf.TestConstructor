@@ -139,7 +139,6 @@ namespace Wpf.TestBuilder.Pages
         }
 
 
-
         /// <summary>
         /// Occures when remove text-label was clicked.
         /// Remove text from the label.
@@ -184,7 +183,7 @@ namespace Wpf.TestBuilder.Pages
         /// <param name="e"></param>
         private void RectangleRemoveOption_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
-            OptionModel option = (OptionModel)ListViewOptions.SelectedItem;
+            OptionModel option = (OptionModel) ListViewOptions.SelectedItem;
 
             if (option != null)
                 _observableViewModel.OptionsModel.Remove(option);

@@ -28,6 +28,7 @@ namespace Wpf.TestBuilder
         /// <param name="e"></param>
         private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
         {
+            FramePageContent.NavigationUIVisibility = NavigationUIVisibility.Hidden;
             FramePageContent.ContentRendered += FramePageContentOnContentRendered;
             FramePageContent.Source = new Uri("Pages/SavedTestsPage.xaml", UriKind.Relative);
         }
@@ -67,13 +68,14 @@ namespace Wpf.TestBuilder
 
                 if (_viewModel.TestModelForEdit != null)
                 {
-                    ((TestPage)FramePageContent.Content).Edit(_viewModel.TestModelForEdit);
+                    ((TestPage) FramePageContent.Content).Edit(_viewModel.TestModelForEdit);
                 }
             }
 
             if (FramePageContent.Content is SavedTestsPage)
             {
-                ((SavedTestsPage)FramePageContent.Content).SavedTestsSelected += SavedTestsPageOnSavedTestsSelected;
+                ((SavedTestsPage) FramePageContent.Content).SavedTestsSelected += SavedTestsPageOnSavedTestsSelected;
+                ((SavedTestsPage) FramePageContent.Content).SavedTestRemovig += OnSavedTestRemovig;
             }
         }
 
@@ -88,6 +90,18 @@ namespace Wpf.TestBuilder
         }
 
         /// <summary>
+        /// Occures when remove button in a saved tests page is clicked.
+        /// Remove  a saved test.
+        /// </summary>
+        /// <param name="testName">recieves a test name for removing.</param>
+        private void OnSavedTestRemovig(string testName)
+        {
+            ((SavedTestsPage) FramePageContent.Content).RemoveTest(testName);
+            _viewModel.SavedTestsPage.RemoveTest(testName);
+            ((SavedTestsPage) FramePageContent.Content).Tests.Save();
+        }
+
+        /// <summary>
         /// Occures when save button was clicked in a test page.
         /// Recieves test model to be serialized. 
         /// </summary>
@@ -95,7 +109,7 @@ namespace Wpf.TestBuilder
         {
             TestModel editableSavedTest = null;
             if (_viewModel.SavedTestsPage.Tests.Count > 0)
-                editableSavedTest = _viewModel.SavedTestsPage.Tests.First(model => model.Name == testModel.Name);
+                editableSavedTest = _viewModel.SavedTestsPage.Tests.FirstOrDefault(model => model.Name == testModel.Name);
 
             if (editableSavedTest != null)
             {
@@ -117,7 +131,6 @@ namespace Wpf.TestBuilder
         private void TestPageOnAllTabsClosed()
         {
             _viewModel.TestPage.ClearTabs();
-            FramePageContent.NavigationUIVisibility = NavigationUIVisibility.Hidden;
             FramePageContent.Source = new Uri("Pages/SavedTestsPage.xaml", UriKind.Relative);
         }
 
@@ -128,7 +141,6 @@ namespace Wpf.TestBuilder
 
         private void OpenCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-
             throw new NotImplementedException();
         }
 
@@ -203,6 +215,7 @@ namespace Wpf.TestBuilder
         private void CancelCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             _viewModel.TestPage.ClearTabs();
+            _viewModel.TestModelForEdit = null;
         }
     }
 }

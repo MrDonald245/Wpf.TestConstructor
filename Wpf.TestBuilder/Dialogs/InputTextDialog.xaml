@@ -8,24 +8,24 @@
         FocusManager.FocusedElement="{Binding ElementName=TextBoxText}"
         Title="Input text" Height="120" Width="300" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Window.Resources>
-        <convertors:EmptyStringToEnabledConverter x:Key="EmptyStringToEnabledConverter"/>
+        <convertors:EmptyStringToEnabledConverter x:Key="EmptyStringToEnabledConverter" />
     </Window.Resources>
-    
-    <Grid >
+
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
-            <RowDefinition/>
+            <RowDefinition />
         </Grid.RowDefinitions>
 
         <!-- Name input -->
         <DockPanel VerticalAlignment="Center">
-            <Label Content="Text:"/>
+            <Label Content="Text:" />
             <TextBox Name="TextBoxText" Margin="0,0,5,0">
                 <TextBox.Text>
-                    <Binding Path="InputNameValue" UpdateSourceTrigger="PropertyChanged"/>
+                    <Binding Path="InputNameValue" UpdateSourceTrigger="PropertyChanged" />
                 </TextBox.Text>
             </TextBox>
-                
+
         </DockPanel>
 
         <!-- Accept and cancel -->
@@ -34,11 +34,9 @@
             <Button Content="Accept" Padding="15,5,15,5" Margin="0,0,5,5"
                     Click="ButtonAccept_OnClick"
                     IsEnabled="{Binding Path=InputNameValue, 
-                        Converter={StaticResource EmptyStringToEnabledConverter}}">
-                
-            </Button>
+                        Converter={StaticResource EmptyStringToEnabledConverter}}" />
             <Button Content="Cancel" Padding="15, 5, 15,5" Margin="0,0,5,5"
-                    Click="ButtonCancel_OnClick"/>
+                    Click="ButtonCancel_OnClick" />
         </StackPanel>
 
     </Grid>

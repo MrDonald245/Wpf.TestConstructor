@@ -10,6 +10,7 @@ namespace Wpf.TestBuilder.Pages
     public class TestPageObservableViewModel : ObservableViewModel
     {
         private string _subjectName;
+
         public string SubjectName
         {
             get { return _subjectName; }
@@ -21,6 +22,7 @@ namespace Wpf.TestBuilder.Pages
         }
 
         private bool _isInEditMode;
+
         public bool IsInEditMode
         {
             get { return _isInEditMode; }
@@ -35,7 +37,7 @@ namespace Wpf.TestBuilder.Pages
 
         public event Action<int> QuestionContainerContentRenderd;
 
-        private TabItem _addTabItem = new TabItem { Header = "+", IsSelected = false };
+        private TabItem _addTabItem = new TabItem {Header = "+", IsSelected = false};
 
         private int _editCurrentTabCount = 1;
 
@@ -57,7 +59,7 @@ namespace Wpf.TestBuilder.Pages
         /// <returns></returns>
         private TabItem CreateNewTabItem(DataTemplate headerTemplate)
         {
-            Frame questionContainer = new Frame { Source = new Uri("Pages/QuestionPage.xaml", UriKind.Relative) };
+            Frame questionContainer = new Frame {Source = new Uri("Pages/QuestionPage.xaml", UriKind.Relative)};
             if (IsInEditMode)
                 questionContainer.ContentRendered += QuestionContainerOnContentRendered;
 
@@ -69,7 +71,7 @@ namespace Wpf.TestBuilder.Pages
                 Content = questionContainer
             };
         }
-        
+
         /// <summary>
         /// Occures when question container content is ready.
         /// </summary>
@@ -102,7 +104,6 @@ namespace Wpf.TestBuilder.Pages
 
             Match matchNumber = Regex.Match(tabItem.Name, @"Answer([0-9]+)");
             return Convert.ToInt32(matchNumber.Groups[1].Value);
-
         }
 
 
@@ -141,9 +142,7 @@ namespace Wpf.TestBuilder.Pages
                     .Where(item => item != deletedTab)
                     .Last(item => item != _addTabItem)
                     .IsSelected = true;
-
             }
         }
-
     }
 }

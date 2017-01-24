@@ -5,36 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:commands="clr-namespace:Wpf.TestBuilder.Commands"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525"
+        Title="Test constructor" Height="350" Width="525"
         Loaded="MainWindow_OnLoaded">
     <Window.CommandBindings>
-        <CommandBinding Command="New" CanExecute="NewCommand_CanExecute" Executed="NewCommand_Executed"/>
-        <CommandBinding Command="Open" CanExecute="OpenCommand_CanExecute" Executed="OpenCommand_Executed"/>
-        <CommandBinding Command="Save" CanExecute="SaveCommand_CanExecute" Executed="SaveCommand_Executed"/>
-        <CommandBinding Command="Close" CanExecute="CloseCommand_CanExecute" Executed="CloseCommand_Executed"/>
-        <CommandBinding Command="commands:ActionCommands.Cancel" CanExecute="CancelCommand_CanExecute" Executed="CancelCommand_Executed"/>
+        <CommandBinding Command="New" CanExecute="NewCommand_CanExecute" Executed="NewCommand_Executed" />
+        <CommandBinding Command="Open" CanExecute="OpenCommand_CanExecute" Executed="OpenCommand_Executed" />
+        <CommandBinding Command="Save" CanExecute="SaveCommand_CanExecute" Executed="SaveCommand_Executed" />
+        <CommandBinding Command="Close" CanExecute="CloseCommand_CanExecute" Executed="CloseCommand_Executed" />
+        <CommandBinding Command="commands:ActionCommands.Cancel" CanExecute="CancelCommand_CanExecute"
+                        Executed="CancelCommand_Executed" />
 
-        <CommandBinding Command="Help" CanExecute="HelpCommand_CanExecute" Executed="HelpCommand_Executed"/>
+        <CommandBinding Command="Help" CanExecute="HelpCommand_CanExecute" Executed="HelpCommand_Executed" />
     </Window.CommandBindings>
 
     <DockPanel>
         <!-- Menu -->
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
-                <MenuItem Command="New"/>
-                <MenuItem Command="Open"/>
+                <MenuItem Command="New" />
+                <MenuItem Command="Open" />
                 <Separator />
-                <MenuItem Command="Save"/>
+                <MenuItem Command="Save" />
                 <Separator />
-                <MenuItem Command="Close"/>
+                <MenuItem Command="Close" />
             </MenuItem>
             <MenuItem Header="_Help">
-                <MenuItem Command="Help"/>
+                <MenuItem Command="Help" />
             </MenuItem>
         </Menu>
 
         <!-- Frame for pages -->
-        <Frame Name="FramePageContent"/>
+        <Frame Name="FramePageContent" />
 
     </DockPanel>
 </Window>

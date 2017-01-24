@@ -8,6 +8,7 @@ namespace Wpf.TestBuilder.Pages
     public class QuestionPageObservableViewModel : ObservableViewModel
     {
         private bool _isImageSelected;
+
         public bool IsImageSelected
         {
             get { return _isImageSelected; }
@@ -19,6 +20,7 @@ namespace Wpf.TestBuilder.Pages
         }
 
         private bool _isRectangleAddTextVisible;
+
         public bool IsRectangleAddTextVisible
         {
             get { return _isRectangleAddTextVisible; }
@@ -30,6 +32,7 @@ namespace Wpf.TestBuilder.Pages
         }
 
         private bool _isLoadingBarEnabled;
+
         public bool IsLoadingBarEnabled
         {
             get { return _isLoadingBarEnabled; }
@@ -41,6 +44,7 @@ namespace Wpf.TestBuilder.Pages
         }
 
         private string _labelTextValue;
+
         public string LabelTextValue
         {
             get { return _labelTextValue; }
@@ -52,17 +56,19 @@ namespace Wpf.TestBuilder.Pages
         }
 
         private bool _isLabelTextInputEnabled;
+
         public bool IsLabelTextInputEnabled
         {
             get { return _isLabelTextInputEnabled; }
             set
             {
-                _isLabelTextInputEnabled = value; 
+                _isLabelTextInputEnabled = value;
                 OnPropertyChanged();
             }
         }
 
         private bool _isInputOptionEnabled;
+
         public bool IsInputOptionEnabled
         {
             get { return _isInputOptionEnabled; }
@@ -74,6 +80,7 @@ namespace Wpf.TestBuilder.Pages
         }
 
         private bool _isOptionsListBoxEnabled;
+
         public bool IsOptionsListBoxEnabled
         {
             get { return _isOptionsListBoxEnabled; }
@@ -85,6 +92,7 @@ namespace Wpf.TestBuilder.Pages
         }
 
         private OptionsModel _optionsModel;
+
         public OptionsModel OptionsModel
         {
             get { return _optionsModel; }

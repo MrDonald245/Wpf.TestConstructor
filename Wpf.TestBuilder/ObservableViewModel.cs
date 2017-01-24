@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 namespace Wpf.TestBuilder
 {
     [Serializable]
-    public abstract class ObservableViewModel : ViewModelBase, INotifyPropertyChanged
+    public abstract class ObservableViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

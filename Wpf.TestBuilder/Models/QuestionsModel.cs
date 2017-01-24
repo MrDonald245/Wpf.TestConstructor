@@ -6,6 +6,5 @@ namespace Wpf.TestBuilder.Models
     [Serializable]
     public class QuestionsModel : ObservableCollection<QuestionModel>
     {
-        
     }
 }

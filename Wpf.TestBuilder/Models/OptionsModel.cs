@@ -1,7 +1,9 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 
 namespace Wpf.TestBuilder.Models
 {
+    [Serializable]
     public class OptionsModel : ObservableCollection<OptionModel>
     {
         /// <summary>
@@ -19,7 +21,7 @@ namespace Wpf.TestBuilder.Models
 
                 return;
             }
-            
+
             base.RemoveItem(index);
         }
     }

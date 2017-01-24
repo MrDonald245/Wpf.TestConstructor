@@ -9,12 +9,12 @@ namespace Wpf.TestBuilder.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (string)value == String.Empty || (string)value == null ? "Hidden" : "Visible";
+            return (string) value == String.Empty || (string) value == null ? "Hidden" : "Visible";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            switch ((Visibility)value)
+            switch ((Visibility) value)
             {
                 case Visibility.Visible:
                     return "";

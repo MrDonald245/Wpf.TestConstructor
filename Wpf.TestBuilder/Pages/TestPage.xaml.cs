@@ -12,7 +12,6 @@ namespace Wpf.TestBuilder.Pages
     /// </summary>
     public partial class TestPage : Page
     {
-
         /// <summary>
         /// Occures when all tabs are closed.
         /// </summary>
@@ -112,7 +111,8 @@ namespace Wpf.TestBuilder.Pages
                 }
 
 
-                _observableViewModel.QuestionContainerContentRenderd += ObservableViewModelOnQuestionContainerContentRenderd;
+                _observableViewModel.QuestionContainerContentRenderd +=
+                    ObservableViewModelOnQuestionContainerContentRenderd;
                 _observableViewModel.AddTabItem(TabControlDynamic.FindResource("TabHeader") as DataTemplate);
                 _questionsDictionary.Add(i, testModel.Questions[i]);
             }
@@ -137,17 +137,22 @@ namespace Wpf.TestBuilder.Pages
             {
                 if (_questionsDictionary[tabIndex].Image != null)
                 {
-                    ((QuestionPage)((Frame)_observableViewModel.Tabs[tabIndex].Content).Content).Image = _questionsDictionary[tabIndex].Image;
-                    ((QuestionPage)((Frame)_observableViewModel.Tabs[tabIndex].Content).Content).IsImageSelected = true;
+                    ((QuestionPage) ((Frame) _observableViewModel.Tabs[tabIndex].Content).Content).Image =
+                        _questionsDictionary[tabIndex].Image;
+                    ((QuestionPage) ((Frame) _observableViewModel.Tabs[tabIndex].Content).Content).IsImageSelected =
+                        true;
                 }
 
                 if (_questionsDictionary[tabIndex].QuestionText != null)
-                    ((QuestionPage)((Frame)_observableViewModel.Tabs[tabIndex].Content).Content).QuestionText = _questionsDictionary[tabIndex].QuestionText;
+                    ((QuestionPage) ((Frame) _observableViewModel.Tabs[tabIndex].Content).Content).QuestionText =
+                        _questionsDictionary[tabIndex].QuestionText;
 
                 if (_questionsDictionary[tabIndex].Options.Count > 0)
                 {
-                    ((QuestionPage)((Frame)_observableViewModel.Tabs[tabIndex].Content).Content).OptionsModel = _questionsDictionary[tabIndex].Options;
-                    ((QuestionPage)((Frame)_observableViewModel.Tabs[tabIndex].Content).Content).IsOptionsListBoxEnabled = true;
+                    ((QuestionPage) ((Frame) _observableViewModel.Tabs[tabIndex].Content).Content).OptionsModel =
+                        _questionsDictionary[tabIndex].Options;
+                    ((QuestionPage) ((Frame) _observableViewModel.Tabs[tabIndex].Content).Content)
+                        .IsOptionsListBoxEnabled = true;
                 }
             }
         }
@@ -159,7 +164,7 @@ namespace Wpf.TestBuilder.Pages
         /// </summary>
         public void Save()
         {
-            TestModel test = new TestModel { Name = _observableViewModel.SubjectName };
+            TestModel test = new TestModel {Name = _observableViewModel.SubjectName};
 
             foreach (TabItem tabItem in _observableViewModel.Tabs)
             {

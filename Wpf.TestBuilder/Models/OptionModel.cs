@@ -1,13 +1,15 @@
 ﻿using System;
-using System.CodeDom;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 
 namespace Wpf.TestBuilder.Models
 {
     [Serializable]
-    public class OptionModel : ObservableViewModel, ISerializable
+    public class OptionModel : INotifyPropertyChanged, ISerializable
     {
         private bool _isRightAnswer;
+
         public bool IsRightAnswer
         {
             get { return _isRightAnswer; }
@@ -19,12 +21,10 @@ namespace Wpf.TestBuilder.Models
         }
 
         private string _name;
+
         public string Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
             set
             {
                 _name = value;
@@ -48,6 +48,14 @@ namespace Wpf.TestBuilder.Models
         {
             info.AddValue("IsRightAnswer", IsRightAnswer);
             info.AddValue("Name", Name);
+        }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

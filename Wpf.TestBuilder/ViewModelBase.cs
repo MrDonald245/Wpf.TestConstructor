@@ -3,5 +3,7 @@
 namespace Wpf.TestBuilder
 {
     [Serializable]
-    public abstract class ViewModelBase { }
+    public abstract class ViewModelBase
+    {
+    }
 }

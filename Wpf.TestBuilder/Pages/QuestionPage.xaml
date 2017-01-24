@@ -3,79 +3,79 @@
 <Page x:Class="Wpf.TestBuilder.Pages.QuestionPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:gif="http://wpfanimatedgif.codeplex.com"
       xmlns:converters="clr-namespace:Wpf.TestBuilder.Converters"
-      mc:Ignorable="d" 
+      mc:Ignorable="d"
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="QuestionPage">
+      Title="Question constructor">
 
     <Page.Resources>
-        <converters:VisibleStateConverter x:Key="VisibleStateConverter"/>
-        <converters:UnvisibleStateConverter x:Key="UnvisibleStateConverter"/>
-        <converters:StringToVisiblilityConverter x:Key="StringToVisiblilityConverter"/>
+        <converters:VisibleStateConverter x:Key="VisibleStateConverter" />
+        <converters:UnvisibleStateConverter x:Key="UnvisibleStateConverter" />
+        <converters:StringToVisiblilityConverter x:Key="StringToVisiblilityConverter" />
     </Page.Resources>
 
     <Grid Name="GridRoot">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
 
         <!-- Empty image -->
-        <Rectangle Name="RectangleAddImage"  Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="3" 
+        <Rectangle Name="RectangleAddImage" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="3"
                    Fill="{StaticResource Image-Add}" MouseDown="RectangleAddImage_OnMouseDown"
                    Visibility="{Binding Path=IsImageSelected, Converter={StaticResource UnvisibleStateConverter}}"
-                   MouseEnter="Element_OnMouseEnter" MouseLeave="Element_OnMouseLeave"/>
+                   MouseEnter="Element_OnMouseEnter" MouseLeave="Element_OnMouseLeave" />
 
         <!-- Image uploader -->
-        <Image Name="ImageUploader" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Grid.RowSpan="5"  
+        <Image Name="ImageUploader" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Grid.RowSpan="5"
                Visibility="{Binding Path=IsImageSelected, Converter={StaticResource VisibleStateConverter}}"
-               Source="{Binding Path=ImageValue}"/>
+               Source="{Binding Path=ImageValue}" />
 
         <!-- Animated gif -->
-        <Image Name="ImageAnimatedGif" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="3" 
+        <Image Name="ImageAnimatedGif" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="3"
                gif:ImageBehavior.AnimatedSource="../Assets/loading.gif"
                Visibility="{Binding Path=IsLoadingBarEnabled, 
-            Converter={StaticResource VisibleStateConverter}}"/>
+            Converter={StaticResource VisibleStateConverter}}" />
 
         <!-- Control panel -->
-        <Grid Grid.Column="3" Grid.Row="5" >
+        <Grid Grid.Column="3" Grid.Row="5">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
             <!-- Remove the text -->
-            <Rectangle 
-                   Fill="{StaticResource Remove-Text}" MouseDown="RectangleRemoveText_OnMouseDown"
-                   Visibility="{Binding Path=LabelTextValue, 
+            <Rectangle
+                Fill="{StaticResource Remove-Text}" MouseDown="RectangleRemoveText_OnMouseDown"
+                Visibility="{Binding Path=LabelTextValue, 
                         Converter={StaticResource StringToVisiblilityConverter}}"
-                   MouseEnter="Element_OnMouseEnter" MouseLeave="Element_OnMouseLeave"/>
+                MouseEnter="Element_OnMouseEnter" MouseLeave="Element_OnMouseLeave" />
 
             <!-- Label inserter -->
             <Rectangle Name="RectangleLabelInserter" Grid.Column="1"
-                   Fill="{StaticResource Edit-Text}" MouseDown="RectangleLabelInserter_OnMouseDown"
-                   Visibility="{Binding Path=IsLabelTextInputEnabled, 
+                       Fill="{StaticResource Edit-Text}" MouseDown="RectangleLabelInserter_OnMouseDown"
+                       Visibility="{Binding Path=IsLabelTextInputEnabled, 
                         Converter={StaticResource UnvisibleStateConverter}}"
-                   MouseEnter="Element_OnMouseEnter" MouseLeave="Element_OnMouseLeave"/>
+                       MouseEnter="Element_OnMouseEnter" MouseLeave="Element_OnMouseLeave" />
 
             <!-- Accept text -->
             <Rectangle Grid.Column="1" MouseDown="RectangleAcceptText_OnMouseDown"
@@ -85,11 +85,11 @@
                        MouseEnter="Element_OnMouseEnter" MouseLeave="Element_OnMouseLeave" />
 
             <!-- Remove the image -->
-            <Rectangle Grid.Column="2" Name="RectangleRemoveImage" 
-                   Fill="{StaticResource Image-Remove}" MouseDown="RectangleRemoveImage_OnMouseDown" 
-                   Visibility="{Binding Path=IsImageSelected, 
+            <Rectangle Grid.Column="2" Name="RectangleRemoveImage"
+                       Fill="{StaticResource Image-Remove}" MouseDown="RectangleRemoveImage_OnMouseDown"
+                       Visibility="{Binding Path=IsImageSelected, 
                         Converter={StaticResource VisibleStateConverter}}"
-                   MouseEnter="Element_OnMouseEnter" MouseLeave="Element_OnMouseLeave"/>
+                       MouseEnter="Element_OnMouseEnter" MouseLeave="Element_OnMouseLeave" />
         </Grid>
 
         <!-- The labebel with a task text -->
@@ -98,23 +98,24 @@
                             Converter={StaticResource UnvisibleStateConverter}}"
                       VerticalScrollBarVisibility="Auto"
                       HorizontalScrollBarVisibility="Auto">
-            <Label Name="LabelText"  Content="{Binding Path=LabelTextValue}" />
+            <Label Name="LabelText" Content="{Binding Path=LabelTextValue}" />
         </ScrollViewer>
 
-        <TextBox Name="TextBoxInputLabel" Grid.Row="5" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="3" 
+        <TextBox Name="TextBoxInputLabel" Grid.Row="5" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="3"
                  VerticalScrollBarVisibility="Auto"
                  HorizontalScrollBarVisibility="Auto"
+                 AcceptsReturn="True"
                  Text="{Binding Path=LabelTextValue, UpdateSourceTrigger=PropertyChanged}"
                  Visibility="{Binding Path=IsLabelTextInputEnabled, 
-                     Converter={StaticResource VisibleStateConverter}}"/>
+                     Converter={StaticResource VisibleStateConverter}}" />
 
         <!-- Options control -->
         <Grid Grid.Row="8" Grid.Column="3">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
             <!-- Add an option -->
@@ -122,35 +123,35 @@
                        MouseEnter="Element_OnMouseEnter" MouseLeave="Element_OnMouseLeave"
                        Visibility="{Binding Path=IsOptionsListBoxEnabled, 
                            Converter={StaticResource VisibleStateConverter}}"
-                       MouseDown="RectangleAddOption_OnMouseDown"/>
+                       MouseDown="RectangleAddOption_OnMouseDown" />
 
             <!-- Remove an option -->
             <Rectangle Grid.Column="1" Fill="{StaticResource Remove}"
                        MouseEnter="Element_OnMouseEnter" MouseLeave="Element_OnMouseLeave"
                        Visibility="{Binding Path=IsOptionsListBoxEnabled, 
                            Converter={StaticResource VisibleStateConverter}}"
-                       MouseDown="RectangleRemoveOption_OnMouseDown"/>
+                       MouseDown="RectangleRemoveOption_OnMouseDown" />
 
             <!-- Remove options image -->
             <Rectangle Grid.Column="3" Fill="{StaticResource Remove-Options}"
                        MouseEnter="Element_OnMouseEnter" MouseLeave="Element_OnMouseLeave"
                        Visibility="{Binding Path=IsOptionsListBoxEnabled, 
                            Converter={StaticResource VisibleStateConverter}}"
-                       MouseDown="RectangleRemoveOptions_OnMouseDown"/>
+                       MouseDown="RectangleRemoveOptions_OnMouseDown" />
 
             <!-- Edit option image -->
             <Rectangle Grid.Column="2" Fill="{StaticResource Edit-Option}"
                        MouseEnter="Element_OnMouseEnter" MouseLeave="Element_OnMouseLeave"
                        Visibility="{Binding Path=IsOptionsListBoxEnabled, 
                             Converter={StaticResource VisibleStateConverter}}"
-                       MouseDown="RectangleEditOption_OnMouseDown"/>
+                       MouseDown="RectangleEditOption_OnMouseDown" />
 
             <!-- Add options image -->
             <Rectangle Grid.Column="3" Fill="{StaticResource Add-Test-Options}"
                        MouseEnter="Element_OnMouseEnter" MouseLeave="Element_OnMouseLeave"
                        MouseDown="RectangleAddOptions_OnMouseDown"
                        Visibility="{Binding Path=IsOptionsListBoxEnabled, 
-                            Converter={StaticResource UnvisibleStateConverter}}"/>
+                            Converter={StaticResource UnvisibleStateConverter}}" />
 
         </Grid>
 
@@ -161,11 +162,11 @@
                      Converter={StaticResource VisibleStateConverter}}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="100"/>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="100" />
                     <GridViewColumn Header="Is right answer" Width="100">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <RadioButton GroupName="options" IsChecked="{Binding IsRightAnswer}"/>
+                                <RadioButton GroupName="options" IsChecked="{Binding IsRightAnswer}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
