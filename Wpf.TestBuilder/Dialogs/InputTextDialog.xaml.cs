@@ -7,8 +7,8 @@ namespace Wpf.TestBuilder.Dialogs
     /// </summary>
     public partial class InputTextDialog : Window
     {
-        private DialogWindowAddNewOptionObservableViewModel _observableViewModel =
-            new DialogWindowAddNewOptionObservableViewModel();
+        private InputTextDialogObservableViewModel _observableViewModel =
+            new InputTextDialogObservableViewModel();
 
         public string OptionNameResult => _observableViewModel.InputNameValue;
 
