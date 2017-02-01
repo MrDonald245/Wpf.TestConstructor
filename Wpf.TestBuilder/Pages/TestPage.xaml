@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:commands="clr-namespace:Wpf.TestBuilder.Commands"
       xmlns:converters="clr-namespace:Wpf.TestBuilder.Converters"
+      xmlns:p="clr-namespace:Wpf.TestBuilder.Properties"
       mc:Ignorable="d"
       d:DesignHeight="300" d:DesignWidth="300"
       Title="TestPage"
@@ -22,7 +23,7 @@
 
         <!-- Subject name -->
         <DockPanel Margin="5">
-            <TextBlock Text="Subject name:" Margin="0,0,5,0" />
+            <TextBlock Text="{x:Static p:Resources.SubjectName}" Margin="0,0,5,0" />
             <TextBox Name="TextBoxSubjectName" Text="{Binding Path=SubjectName, UpdateSourceTrigger=PropertyChanged}"
                      IsEnabled="{Binding Path=IsInEditMode, Converter={StaticResource EnabledReverseConverter}}" />
         </DockPanel>
@@ -50,8 +51,8 @@
 
         <!-- Accept and cancel buttons -->
         <DockPanel Grid.Row="2" HorizontalAlignment="Right" Margin="5">
-            <Button Content="Save" Margin="0,0,5,0" Padding="15,5,15,5" Command="Save" />
-            <Button Content="Cancel" Padding="15,5,15,5" Command="commands:ActionCommands.Cancel" />
+            <Button Content="{x:Static p:Resources.Save}" Margin="0,0,5,0" Padding="15,5,15,5" Command="Save" />
+            <Button Content="{x:Static p:Resources.Cancel}" Padding="15,5,15,5" Command="commands:ActionCommands.Cancel" />
         </DockPanel>
     </Grid>
 </Page>

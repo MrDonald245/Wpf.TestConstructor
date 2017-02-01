@@ -92,9 +92,9 @@ namespace Wpf.TestBuilder.Pages
         {
             int lastAddedTabIndex = Tabs.Max(Selector);
             if (lastAddedTabIndex == 0)
-                return $"Answer{Tabs.Count}";
+                return $"{Properties.Resources.Question}{Tabs.Count}";
 
-            return $"Answer{lastAddedTabIndex + 1}";
+            return $"{Properties.Resources.Question}{lastAddedTabIndex + 1}";
         }
 
         private int Selector(TabItem tabItem)
@@ -102,7 +102,7 @@ namespace Wpf.TestBuilder.Pages
             if (tabItem.Name == string.Empty)
                 return 0;
 
-            Match matchNumber = Regex.Match(tabItem.Name, @"Answer([0-9]+)");
+            Match matchNumber = Regex.Match(tabItem.Name, $"{Properties.Resources.Question}([0-9]+)");
             return Convert.ToInt32(matchNumber.Groups[1].Value);
         }
 

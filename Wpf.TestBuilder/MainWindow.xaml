@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:commands="clr-namespace:Wpf.TestBuilder.Commands"
+        xmlns:p="clr-namespace:Wpf.TestBuilder.Properties"
         mc:Ignorable="d"
         Title="Test constructor" Height="350" Width="525"
         Loaded="MainWindow_OnLoaded">
@@ -21,7 +22,7 @@
     <DockPanel>
         <!-- Menu -->
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="_File">
+            <MenuItem Header="{x:Static p:Resources.File}">
                 <MenuItem Command="New" />
                 <MenuItem Command="Open" />
                 <Separator />
@@ -29,7 +30,7 @@
                 <Separator />
                 <MenuItem Command="Close" />
             </MenuItem>
-            <MenuItem Header="_Help">
+            <MenuItem Header="{x:Static p:Resources.Help}">
                 <MenuItem Command="Help" />
             </MenuItem>
         </Menu>

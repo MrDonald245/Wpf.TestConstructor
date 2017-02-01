@@ -118,21 +118,21 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Отмена</value>
   </data>
   <data name="File" xml:space="preserve">
-    <value>_File</value>
+    <value>_Файл</value>
   </data>
   <data name="Help" xml:space="preserve">
-    <value>_Help</value>
+    <value>_Помощь</value>
   </data>
   <data name="Question" xml:space="preserve">
-    <value>Question</value>
+    <value>Вопрос</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Save</value>
+    <value>Сохранить</value>
   </data>
   <data name="SubjectName" xml:space="preserve">
-    <value>Subject name:</value>
+    <value>Предмет:</value>
   </data>
 </root>
